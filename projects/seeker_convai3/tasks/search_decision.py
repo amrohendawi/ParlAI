@@ -11,13 +11,9 @@ from typing import Optional
 from parlai.core.opt import Opt
 from parlai.core.params import ParlaiParser
 from parlai.core.teachers import MultiTaskTeacher
-import parlai.tasks.convai2.agents as convai2
-import parlai.tasks.empathetic_dialogues.agents as ed
 import parlai.tasks.wizard_of_internet.agents as woi
-import parlai.tasks.wizard_of_wikipedia.agents as wow
 import parlai.tasks.squad.agents as squad
 import parlai.tasks.triviaqa.agents as triviaqa
-import parlai.tasks.natural_questions.agents as nq
 import parlai.tasks.msc.agents as msc
 
 import parlai.utils.logging as logging
