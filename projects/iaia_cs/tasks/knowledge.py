@@ -81,6 +81,18 @@ class SquadKnowledgeTeacher(squad.DefaultTeacher):
             'add_selected_sentences_mutator',
         ]
 
+class ConvAI3KnowledgeTeacher(msc.DefaultTeacher):
+    def __init__(self, opt, shared=None):
+        mutators = '+'.join(self.get_special_mutators(opt))
+        if opt.get('mutators'):
+            mutators = '+'.join([mutators, opt['mutators']])
+        logging.warning(f'overriding mutators to {mutators}')
+        opt['mutators'] = mutators
+        super().__init__(opt, shared)
+        self.id = "ConvAI3KnowledgeTeacher"
+
+    def get_special_mutators(self, opt):
+        return get_dialogue_task_mutators(opt)
 
 class TriviaQAKnowledgeTeacher(triviaqa.DefaultTeacher):
     def __init__(self, opt, shared=None):
@@ -169,6 +181,7 @@ class KnowledgeTeacher(MultiTaskTeacher):
         WoiKnowledgeTeacher.add_cmdline_args(parser, partial_opt)
         MsMarcoKnowledgeTeacher.add_cmdline_args(parser, partial_opt)
         SquadKnowledgeTeacher.add_cmdline_args(parser, partial_opt)
+        ConvAI3KnowledgeTeacher.add_cmdline_args(parser, partial_opt)
         TriviaQAKnowledgeTeacher.add_cmdline_args(parser, partial_opt)
         NQOpenKnowledgeTeacher.add_cmdline_args(parser, partial_opt)
         MSCKnowledgeTeacher.add_cmdline_args(parser, partial_opt)
@@ -182,6 +195,7 @@ class KnowledgeTeacher(MultiTaskTeacher):
                 'WoiKnowledgeTeacher',
                 'MsMarcoKnowledgeTeacher',
                 'SquadKnowledgeTeacher',
+                'ConvAI3KnowledgeTeacher',
                 'TriviaQAKnowledgeTeacher',
                 'NQOpenKnowledgeTeacher',
                 'MSCKnowledgeTeacher',
